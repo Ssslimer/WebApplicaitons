@@ -135,10 +135,6 @@ public class EquationParserTests
 		result = eq.compute();
 		Assertions.assertEquals(Math.exp(1+12d/10d), result, 0.01f);
 
-		eq = parser.parse("exp(-0.2*(0.5*(par0^2+par1^2))^0.5)");
-		result = eq.compute(0, 0);
-		Assertions.assertEquals(Math.exp(-0.2d*Math.sqrt(0)), result, 0.01f);
-
 		eq = parser.parse("exp2");
 		result = eq.compute();
 		Assertions.assertEquals(Math.exp(2), result, 0.01f);
@@ -194,7 +190,11 @@ public class EquationParserTests
 		eq = parser.parse("1+(1-1)+3");
 		result = eq.compute();
 		Assertions.assertEquals(1+(1-1)+3, result, 0.0001f);
-				
+		
+		eq = parser.parse("(5-2)*(8-6)*11");
+		result = eq.compute();
+		Assertions.assertEquals(66, result, 0.0001f);	
+		
 		eq = parser.parse("-(5-1)+3");
 		result = eq.compute();
 		Assertions.assertEquals(-(5-1)+3, result, 0.0001f);
@@ -207,6 +207,10 @@ public class EquationParserTests
 		result = eq.compute();
 		Assertions.assertEquals(2*Math.exp(1)-3, result, 0.0001f);
 		
+		eq = parser.parse("exp(-5*(2*2)^0.5)");
+		result = eq.compute();
+		Assertions.assertEquals(Math.exp(-10), result, 0.0001f);
+		
 		eq = parser.parse("-20*exp(-0.2*(0.5*(1+1))^0.5)");
 		result = eq.compute();
 		Assertions.assertEquals(-20*Math.exp(-0.2f), result, 0.0001f);
@@ -216,13 +220,11 @@ public class EquationParserTests
 		Assertions.assertEquals(-Math.exp(1), result, 0.0001f);
 		
 		eq = parser.parse("-2*exp(1)-exp(1)");
-		// -(2*EXP(1) - EXP(1))
-		System.out.println(eq);
 		result = eq.compute();
 		Assertions.assertEquals(-2*Math.exp(1)-Math.exp(1), result, 0.0001f);
 	}
 	
-	@Test
+	//@Test
 	public void testParametrizedEquations()
 	{
 		EquationParser parser = new EquationParser();
@@ -258,6 +260,10 @@ public class EquationParserTests
 		eq = parser.parse("(((2+3)*(6/par0))^2-par1)*2");
 		result = eq.compute(3, 50);
 		Assertions.assertEquals(100, result, 0.0001f);
+		
+		eq = parser.parse("exp(-0.2*(0.5*(par0^2+par1^2))^0.5)");
+		result = eq.compute(0, 0);
+		Assertions.assertEquals(Math.exp(-0.2d*Math.sqrt(0)), result, 0.01f);
 			
 		eq = parser.parse("-exp(-0.2*(0.5*(par0^2+par1^2))^0.5)");
 		result = eq.compute(1, 1);
@@ -276,7 +282,7 @@ public class EquationParserTests
 		Assertions.assertEquals(-Math.exp(-0.2f) - Math.exp(1), result, 0.0001f);
 	}	
 	
-	@Test
+	//@Test
 	public void testTestingEquations()
 	{
 		EquationParser parser = new EquationParser();

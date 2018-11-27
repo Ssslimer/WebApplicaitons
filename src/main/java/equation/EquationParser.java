@@ -79,25 +79,35 @@ public class EquationParser
 						i = subequationData.jumpTo-1;
 					}
 					else
-					{
-						SubequationData subequationData = findSubequationFromBrackets(s, i, equation, false);
-						Equation subEquation = parse(subequationData.subequation);					
-						equation.variables.addAll(subEquation.variables);
-						
+					{					
 						int nextPower = findNextOperandPower(s.substring(i, s.length()), equation);
 						if(equation.root.operand.getPower() - nextPower >= 0)
 						{
-							subequationData = findSubequation(s.substring(i-1), equation.root.operand.getPower());
-							String s2 = s.substring(i);
-							subEquation = parse(s2);
-							equation.variables.addAll(subEquation.variables);
-							equation.root.right = subEquation.root;
-							i = s.length();
-							continue;
+							if(equation.root.operand == Operand.MINUS)
+							{
+								SubequationData subequationData = findSubequationFromBrackets(s, i, equation, true);
+								Equation subEquation = parse(subequationData.subequation);	
+								equation.variables.addAll(subEquation.variables);
+								equation.root.right = subEquation.root;
+								i += subequationData.jumpTo-2;
+							}
+							else
+							{
+								String s2 = s.substring(i);
+								Equation subEquation = parse(s2);
+								equation.variables.addAll(subEquation.variables);
+								equation.root.right = subEquation.root;
+								i = s.length();
+							}
 						}
-						else equation.root.right = subEquation.root;	
-						
-						i = subequationData.jumpTo-1;
+						else
+						{
+							SubequationData subequationData = findSubequationFromBrackets(s, i, equation, false);
+							Equation subEquation = parse(subequationData.subequation);					
+							equation.variables.addAll(subEquation.variables);						
+							equation.root.right = subEquation.root;
+							i += subequationData.jumpTo-1;
+						}		
 					}	
 				break;
 				
@@ -129,6 +139,7 @@ public class EquationParser
 									else
 									{
 										i += subequationData.jumpTo-1;
+										//equation.root.right = new ValueNode(value);
 										equation.root.right = subEquation.root;
 									}
 	
@@ -161,7 +172,7 @@ public class EquationParser
 									if(equation.root == null) equation.root = subEquation.root;
 									else
 									{
-										i = subequationData.jumpTo-1;
+										i += subequationData.jumpTo-1;
 										equation.root.right = subEquation.root;
 									}
 	
@@ -216,7 +227,7 @@ public class EquationParser
 									else equation.root.right = subEquation.root;		
 								}
 								
-								i = subequationData.jumpTo-1;
+								i += subequationData.jumpTo+2;
 							}
 						}
 						else if(s.length() >= i+3 && c == 's' && s.charAt(i+1) == 'i' && s.charAt(i+2) == 'n')
@@ -453,10 +464,8 @@ public class EquationParser
 		int closings = 0;
 		int pointer = begin+1;
 			
-		while(openings != closings)
+		while(openings != closings && pointer != s.length())
 		{
-			if(s.length() == pointer) break;
-				
 			char nextChar = s.charAt(pointer);
 
 			if(nextChar == '(') openings++;
@@ -484,7 +493,7 @@ public class EquationParser
 				case '*':
 				case '/':
 				case '^':
-					if(foundOperand) return new SubequationData(s.substring(i), i);
+					if(foundOperand) return new SubequationData(s.substring(0, i), i);
 					if(!hasStrongerOperand(s, i, basicPower))
 					{
 						foundOperand = true;
@@ -492,7 +501,7 @@ public class EquationParser
 					}
 					break;
 					
-				case '(': i = skipBrackets(s, 0)-1;
+				case '(': i = skipBrackets(s, i)-1;
 				default : break;
 			}
 		}
@@ -540,7 +549,7 @@ public class EquationParser
 					else return (operandBeforePower - Operand.POWER.getPower() < 0);
 				
 				case '(':
-					i = skipBrackets(s, begin) - 1;
+					i = skipBrackets(s, i) - 1;
 				default : break;
 			}
 		}
