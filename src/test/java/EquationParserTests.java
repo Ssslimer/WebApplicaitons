@@ -222,9 +222,13 @@ public class EquationParserTests
 		eq = parser.parse("-2*exp(1)-exp(1)");
 		result = eq.compute();
 		Assertions.assertEquals(-2*Math.exp(1)-Math.exp(1), result, 0.0001f);
+		
+		eq = parser.parse("-3*5+7");
+		result = eq.compute();
+		Assertions.assertEquals(-8, result, 0.0001f);
 	}
 	
-	//@Test
+	@Test
 	public void testParametrizedEquations()
 	{
 		EquationParser parser = new EquationParser();
@@ -282,7 +286,7 @@ public class EquationParserTests
 		Assertions.assertEquals(-Math.exp(-0.2f) - Math.exp(1), result, 0.0001f);
 	}	
 	
-	//@Test
+	@Test
 	public void testTestingEquations()
 	{
 		EquationParser parser = new EquationParser();

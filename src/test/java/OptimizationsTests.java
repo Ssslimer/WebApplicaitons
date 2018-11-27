@@ -25,7 +25,7 @@ public class OptimizationsTests
 		s = new SimulatedAnnealing();
 		optimum = s.findGlobalOptimum(eq, Optimum.MINIMA, 10_000, new SearchDomain(-5, 5, -5, 5));	
 		printResults(eq, optimum, Optimum.MINIMA);
-		System.out.println("Exact extrema: 3 0.5 Global MINIMA: 0 \n");	
+		System.out.println("Exact extrema: 3 0.5 Global MINIMA: 0 \n");
 		
 		System.out.println("Testing ACKLEY function");
 		eq = parser.parse(TestFunction.ACKLEY.asString());

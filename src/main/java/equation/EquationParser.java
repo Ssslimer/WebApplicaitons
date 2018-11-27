@@ -391,7 +391,7 @@ public class EquationParser
 										if(equation.root == null) equation.root = subEquation.root;
 										else
 										{
-											i = subequationData.jumpTo-1;
+											i += subequationData.jumpTo-1;
 											equation.root.right = subEquation.root;
 										}
 		
