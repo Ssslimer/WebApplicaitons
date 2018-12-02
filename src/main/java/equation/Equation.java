@@ -1,10 +1,13 @@
 package equation;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Equation
+public class Equation implements Serializable
 {
+	private static final long serialVersionUID = 9120785136454094701L;
+	
 	Node root;
 	Set<Integer> variables = new HashSet<>();
 	
