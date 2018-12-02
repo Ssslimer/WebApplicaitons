@@ -1,7 +1,11 @@
 package equation;
 
-public class OptimizationResult
+import java.io.Serializable;
+
+public class OptimizationResult implements Serializable
 {
+	private static final long serialVersionUID = -7868064535618414648L;
+	
 	private final int steps;
 	private final double value;
 	private final double[] variables;
@@ -40,11 +44,11 @@ public class OptimizationResult
 	{
 		StringBuilder builder = new StringBuilder();
 		builder.append("Result:");
-		builder.append("Steps ");
+		builder.append(" Steps ");
 		builder.append(steps);
-		builder.append("Minima value ");
+		builder.append(" Minima value ");
 		builder.append(value);
-		builder.append("Best variables ");
+		builder.append(" Best variables ");
 		for(double var : variables) builder.append(var +" ");
 		
 		return builder.toString();

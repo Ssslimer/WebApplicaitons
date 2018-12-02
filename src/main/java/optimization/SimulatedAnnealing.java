@@ -36,7 +36,6 @@ public class SimulatedAnnealing
                     
                     if(bestValue - currentValue < changeThreshold)
                     {
-            			System.out.println("Final step: " + step);
                     	return new OptimizationResult(step, bestValue, bestVariables, null);
                     }
                     
