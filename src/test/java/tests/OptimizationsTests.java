@@ -1,9 +1,10 @@
+package tests;
 import org.junit.jupiter.api.Test;
 
 import equation.Equation;
 import equation.EquationParser;
-import equation.SearchDomain;
 import optimization.DifferentialEvolution;
+import optimization.SearchDomain;
 import optimization.SimulatedAnnealing;
 
 public class OptimizationsTests
@@ -24,50 +25,43 @@ public class OptimizationsTests
 
 		System.out.println("Testing ROSENBROCK function");
 		Equation eq = parser.parse(TestFunction.ROSENBROCK.asString());
-		SimulatedAnnealing s = new SimulatedAnnealing();
-		double[] optimum = s.findGlobalOptimum(eq, 10_000, new SearchDomain(-5, 5, -5, 5)).getVariables();		
+		double[] optimum = SimulatedAnnealing.findGlobalOptimum(eq, 10_000, new SearchDomain(-5, 5, -5, 5)).getVariables();		
 		printResults(eq, optimum);
 		System.out.println("Exact extrema: 1 1 Global MINIMA: 0 \n");
 		
 		System.out.println("Testing BEALE function");
 		eq = parser.parse(TestFunction.BEALE.asString());
-		s = new SimulatedAnnealing();
-		optimum = s.findGlobalOptimum(eq, 10_000, new SearchDomain(-5, 5, -5, 5)).getVariables();	
+		optimum = SimulatedAnnealing.findGlobalOptimum(eq, 10_000, new SearchDomain(-5, 5, -5, 5)).getVariables();	
 		printResults(eq, optimum);
 		System.out.println("Exact extrema: 3 0.5 Global MINIMA: 0 \n");
 		
 		System.out.println("Testing ACKLEY function");
 		eq = parser.parse(TestFunction.ACKLEY.asString());
-		s = new SimulatedAnnealing();
-		optimum = s.findGlobalOptimum(eq, 10_000, new SearchDomain(-5, 5, -5, 5)).getVariables();	
+		optimum = SimulatedAnnealing.findGlobalOptimum(eq, 10_000, new SearchDomain(-5, 5, -5, 5)).getVariables();	
 		printResults(eq, optimum);
 		System.out.println("Exact extrema: 0 0 Global MINIMA: 0 \n");
 		
 		System.out.println("Testing BOOTH function");
 		eq = parser.parse(TestFunction.BOOTH.asString());
-		s = new SimulatedAnnealing();
-		optimum = s.findGlobalOptimum(eq, 10_000, new SearchDomain(-5, 5, -5, 5)).getVariables();	
+		optimum = SimulatedAnnealing.findGlobalOptimum(eq, 10_000, new SearchDomain(-5, 5, -5, 5)).getVariables();	
 		printResults(eq, optimum);
 		System.out.println("Exact extrema: 1 3 Global MINIMA: 0 \n");
 		
 		System.out.println("Testing GOLDSTEIN_PRICE function");
 		eq = parser.parse(TestFunction.GOLDSTEIN_PRICE.asString());
-		s = new SimulatedAnnealing();
-		optimum = s.findGlobalOptimum(eq, 10_000, new SearchDomain(-5, 5, -5, 5)).getVariables();	
+		optimum = SimulatedAnnealing.findGlobalOptimum(eq, 10_000, new SearchDomain(-5, 5, -5, 5)).getVariables();	
 		printResults(eq, optimum);
 		System.out.println("Exact extrema: 0 -1 Global MINIMA: 3 \n");
 		
 		System.out.println("Testing MATYAS function");
 		eq = parser.parse(TestFunction.MATYAS.asString());
-		s = new SimulatedAnnealing();
-		optimum = s.findGlobalOptimum(eq, 10_000, new SearchDomain(-5, 5, -5, 5)).getVariables();	
+		optimum = SimulatedAnnealing.findGlobalOptimum(eq, 10_000, new SearchDomain(-5, 5, -5, 5)).getVariables();	
 		printResults(eq, optimum);
 		System.out.println("Exact extrema: 0 0 Global MINIMA: 0 \n");
 		
 		System.out.println("Testing THREE_HUMP_CAMEL function");
 		eq = parser.parse(TestFunction.THREE_HUMP_CAMEL.asString());
-		s = new SimulatedAnnealing();
-		optimum = s.findGlobalOptimum(eq, 10_000, new SearchDomain(-5, 5, -5, 5)).getVariables();	
+		optimum = SimulatedAnnealing.findGlobalOptimum(eq, 10_000, new SearchDomain(-5, 5, -5, 5)).getVariables();	
 		printResults(eq, optimum);
 		System.out.println("Exact extrema: 0 0 Global MINIMA: 0 \n");
 	}
@@ -76,47 +70,46 @@ public class OptimizationsTests
 	public void testDifferentialEvolution()
 	{
 		EquationParser parser = new EquationParser();
-		DifferentialEvolution s = new DifferentialEvolution();
 		
 		System.out.println("Testing ROSENBROCK function");
 		Equation eq = parser.parse(TestFunction.ROSENBROCK.asString());
-		double[] optimum = s.findGlobalOptimum(eq, 1_000, new SearchDomain(-5, 5, -5, 5)).getVariables();		
+		double[] optimum = DifferentialEvolution.findGlobalOptimum(eq, 1_000, new SearchDomain(-5, 5, -5, 5)).getVariables();		
 		printResults(eq, optimum);
 		System.out.println("Exact extrema: 1 1 Global MINIMA: 0 \n");
 		
 		System.out.println("Testing BEALE function");
 		eq = parser.parse(TestFunction.BEALE.asString());
-		optimum = s.findGlobalOptimum(eq, 1_000, new SearchDomain(-5, 5, -5, 5)).getVariables();	
+		optimum = DifferentialEvolution.findGlobalOptimum(eq, 1_000, new SearchDomain(-5, 5, -5, 5)).getVariables();	
 		printResults(eq, optimum);
 		System.out.println("Exact extrema: 3 0.5 Global MINIMA: 0 \n");
 		
 		System.out.println("Testing ACKLEY function");
 		eq = parser.parse(TestFunction.ACKLEY.asString());
-		optimum = s.findGlobalOptimum(eq, 1_000, new SearchDomain(-5, 5, -5, 5)).getVariables();	
+		optimum = DifferentialEvolution.findGlobalOptimum(eq, 1_000, new SearchDomain(-5, 5, -5, 5)).getVariables();	
 		printResults(eq, optimum);
 		System.out.println("Exact extrema: 0 0 Global MINIMA: 0 \n");
 		
 		System.out.println("Testing BOOTH function");
 		eq = parser.parse(TestFunction.BOOTH.asString());
-		optimum = s.findGlobalOptimum(eq, 1_000, new SearchDomain(-5, 5, -5, 5)).getVariables();	
+		optimum = DifferentialEvolution.findGlobalOptimum(eq, 1_000, new SearchDomain(-5, 5, -5, 5)).getVariables();	
 		printResults(eq, optimum);
 		System.out.println("Exact extrema: 1 3 Global MINIMA: 0 \n");
 		
 		System.out.println("Testing GOLDSTEIN_PRICE function");
 		eq = parser.parse(TestFunction.GOLDSTEIN_PRICE.asString());
-		optimum = s.findGlobalOptimum(eq, 1_000, new SearchDomain(-5, 5, -5, 5)).getVariables();	
+		optimum = DifferentialEvolution.findGlobalOptimum(eq, 1_000, new SearchDomain(-5, 5, -5, 5)).getVariables();	
 		printResults(eq, optimum);
 		System.out.println("Exact extrema: 0 -1 Global MINIMA: 3 \n");
 		
 		System.out.println("Testing MATYAS function");
 		eq = parser.parse(TestFunction.MATYAS.asString());
-		optimum = s.findGlobalOptimum(eq, 1_000, new SearchDomain(-5, 5, -5, 5)).getVariables();	
+		optimum = DifferentialEvolution.findGlobalOptimum(eq, 1_000, new SearchDomain(-5, 5, -5, 5)).getVariables();	
 		printResults(eq, optimum);
 		System.out.println("Exact extrema: 0 0 Global MINIMA: 0 \n");
 		
 		System.out.println("Testing THREE_HUMP_CAMEL function");
 		eq = parser.parse(TestFunction.THREE_HUMP_CAMEL.asString());
-		optimum = s.findGlobalOptimum(eq, 1_000, new SearchDomain(-5, 5, -5, 5)).getVariables();	
+		optimum = DifferentialEvolution.findGlobalOptimum(eq, 1_000, new SearchDomain(-5, 5, -5, 5)).getVariables();	
 		printResults(eq, optimum);
 		System.out.println("Exact extrema: 0 0 Global MINIMA: 0 \n");
 	}

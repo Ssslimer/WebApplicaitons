@@ -2,13 +2,13 @@ package equation;
 
 import java.io.Serializable;
 
-public class VariableNode extends Node implements Serializable
+class VariableNode extends Node implements Serializable
 {
 	private static final long serialVersionUID = -803095058690597308L;
 	
 	int variableIndex;
 	
-	public VariableNode(int variableIndex)
+	VariableNode(int variableIndex)
 	{
 		super(Operand.VARIABLE);
 		this.variableIndex = variableIndex;

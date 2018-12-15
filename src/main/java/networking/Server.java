@@ -2,7 +2,7 @@ package networking;
 
 import java.net.ServerSocket;
 
-public class Server extends Thread
+class Server extends Thread
 {
 	public Server(int port)
 	{

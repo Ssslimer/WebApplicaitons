@@ -2,27 +2,28 @@ package optimization;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
 import equation.Equation;
-import equation.OptimizationResult;
-import equation.SearchDomain;
 
 public class DifferentialEvolution
 {
 	private static Random random = new Random();
 
-	public OptimizationResult findGlobalOptimum(Equation eq, int maxSteps, SearchDomain searchDomain)
+	public static OptimizationResult findGlobalOptimum(Equation eq, int maxSteps, SearchDomain searchDomain)
 	{		
-		final double changeThreshold = 0.0001d;		
+		final double changeThreshold = 0.00001d;
 		final int problemSize = eq.getVariables().size();
-		final double differentialWeight = 0.8d; //random.nextDouble()*2;
-		final double crossoverRate = 0.9d; //random.nextDouble();			
+		final double differentialWeight = 0.8d;
+		final double crossoverRate = 0.9d;
 		final int populationSize = 10;
 			
 		double[][] population = new double[populationSize][problemSize];
 		double[]   bestSolution = new double[problemSize];
+		
+        List<double[][]> variablesMemory = new LinkedList<>();
 		
 		for(int agent = 0; agent < population.length; agent++)
 		{
@@ -38,62 +39,92 @@ public class DifferentialEvolution
 			
 			for(int agent = 0; agent < population.length; agent++)
 			{
-				double[] newSample = newSample(agent, population, problemSize, differentialWeight, crossoverRate);
+				double[] newSample = newSample(agent, population, problemSize, differentialWeight, crossoverRate, searchDomain);
 				
 				if(eq.compute(newSample) < eq.compute(population[agent]))
 				{
+					newPopulation[agent] = newSample;
+					
 					if(eq.compute(population[agent]) - eq.compute(newSample) < changeThreshold)
 					{
-						double[] bestVariables = findBestResult(eq, population);
-						return new OptimizationResult(step, eq.compute(bestVariables), bestVariables, null);
-					}
-					
-					newPopulation[agent] = newSample;
+						double[] bestVariables = findBestResult(eq, variablesMemory);
+                    	double[] variablesHistory = generateVariablesHistory(variablesMemory, problemSize * populationSize);
+						return new OptimizationResult(eq, step, eq.compute(bestVariables), bestVariables, variablesHistory, searchDomain.ranges);
+					}										
 				}
 				else newPopulation[agent] = Arrays.copyOf(population[agent], problemSize);			
 			}
 			
 			population = newPopulation;
+
+			variablesMemory.add(Arrays.stream(population).map(double[]::clone).toArray(double[][]::new));
 			
-			bestSolution = findBestResult(eq, population);
+			bestSolution = findBestResult(eq, variablesMemory);
 		}
-	
-		return new OptimizationResult(maxSteps, eq.compute(bestSolution), bestSolution, null);
+		
+		double[] variablesHistory = generateVariablesHistory(variablesMemory, problemSize * populationSize);
+		return new OptimizationResult(eq, maxSteps, eq.compute(bestSolution), bestSolution, variablesHistory, searchDomain.ranges);
 	}
 	
-	private double[] newSample(int agent, double[][] agents, int problemSize, double differentialWeight, double crossoverRate)
+	private static double[] generateVariablesHistory(List<double[][]> list, int size)
+	{
+		double[] result = new double[size * list.size()];
+		
+		int i = 0;
+		for(double[][] array2D : list)
+		{
+			for(double[] array : array2D)
+			{
+				for(double d : array)
+				{
+					result[i] = d;
+					i++;
+				}
+			}
+		}
+
+		return result;
+	}
+	
+	private static double[] newSample(int agentId, double[][] agents, int problemSize, double differentialWeight, double crossoverRate, SearchDomain domain)
 	{
 		double[] newSample = new double[problemSize];
 		
-		List<Integer> indiciesList = randomAgentsIndices(3, agent, agents.length);
-		
-		for(int i = 0; i < problemSize; i++)
+		boolean b=true;
+		randomizeAgents : while(b)
 		{
-			int R = random.nextInt(problemSize);
+			List<Integer> indiciesList = randomAgentsIndices(3, agentId, agents.length);
 			
-			if(i == R && random.nextDouble() < crossoverRate)
+			for(int i = 0; i < problemSize; i++)
 			{
-				double P2i = agents[indiciesList.get(2)][i];
-				double P1i = agents[indiciesList.get(1)][i];
-				double P0i = agents[indiciesList.get(0)][i];
+				int R = random.nextInt(problemSize);
 				
-				newSample[i] = P2i + differentialWeight * (P0i - P1i);						
+				if(i == R && random.nextDouble() < crossoverRate)
+				{
+					double P2i = agents[indiciesList.get(2)][i];
+					double P1i = agents[indiciesList.get(1)][i];
+					double P0i = agents[indiciesList.get(0)][i];
+					
+					double variableValue = P2i + differentialWeight * (P0i - P1i);
+					
+					if(variableValue < domain.ranges[i][0] || variableValue > domain.ranges[i][1]) continue randomizeAgents; 
+					else newSample[i] = variableValue;
+				}
+				else newSample[i] = agents[agentId][i];
 			}
-			else
-			{
-				newSample[i] = agents[agent][i];
-			}
+			
+			break;
 		}
-		
+
 		return newSample;
 	}
     
-    private double randomValueFromRange(double min, double max)
+    private static double randomValueFromRange(double min, double max)
     {
     	return min + (max - min) * random.nextDouble();
     }
     
-    private List<Integer> randomAgentsIndices(int howMany, int excludedIndex, int range)
+    private static List<Integer> randomAgentsIndices(int howMany, int excludedIndex, int range)
     {
     	List<Integer> indicies = new ArrayList<>(howMany);
     	
@@ -107,20 +138,23 @@ public class DifferentialEvolution
     	return indicies;
     }
     
-	private double[] findBestResult(Equation eq, double[][] variables)
+	private static double[] findBestResult(Equation eq, List<double[][]> variables)
 	{
 		double[] bestVariables = new double[eq.getVariables().size()];
 		double bestValue = Double.MAX_VALUE;
 		
-		for(int i = 0; i < variables.length; i++)
+		for(double[][] array2D : variables)
 		{
-			double value = eq.compute(variables[i]);
-			
-			if(value < bestValue)
+			for(int i = 0; i < array2D.length; i++)
 			{
-				bestVariables = Arrays.copyOf(variables[i], eq.getVariables().size());
+				double value = eq.compute(array2D[i]);
+				
+				if(value < bestValue)
+				{
+					bestVariables = Arrays.copyOf(array2D[i], eq.getVariables().size());
+				}
 			}
-		}
+		}		
 		
 		return bestVariables;
 	}

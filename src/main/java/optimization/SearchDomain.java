@@ -1,4 +1,4 @@
-package equation;
+package optimization;
 
 import java.io.Serializable;
 

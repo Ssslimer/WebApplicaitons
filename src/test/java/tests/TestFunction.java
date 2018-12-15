@@ -1,3 +1,4 @@
+package tests;
 public enum TestFunction
 {
 	ROSENBROCK("(1-par0)^2+100*(par1-par0^2)^2"),

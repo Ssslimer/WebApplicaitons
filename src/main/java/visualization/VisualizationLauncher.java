@@ -6,19 +6,18 @@ import org.jzy3d.chart.Chart;
 import org.jzy3d.chart.ChartLauncher;
 import org.jzy3d.global.Settings;
 
-public class DemoLauncher
+public class VisualizationLauncher
 {	
-	protected static String DEFAULT_CANVAS_TYPE = "awt";
-	protected static Rectangle DEFAULT_WINDOW = new Rectangle(0,0,600,600);
+	private static final Rectangle DEFAULT_WINDOW = new Rectangle(0, 0, 600, 600);
+	private static final String WINDOW_NAME = "PAI O3";
 	
-    /** Opens a demo with mouse/key/thread controllers for viewpoint change. */
-	public static void openDemo(Demo demo) throws Exception
+	public static void show(Visualization visualization) throws Exception
 	{	
 		Settings.getInstance().setHardwareAccelerated(true);
-		demo.init();
-		Chart chart = demo.getChart();
+		visualization.init();
+		Chart chart = visualization.getChart();
 		
 		ChartLauncher.instructions();
-		ChartLauncher.openChart(chart, DEFAULT_WINDOW, "PAI O3");
+		ChartLauncher.openChart(chart, DEFAULT_WINDOW, WINDOW_NAME);
 	}
 }

@@ -8,7 +8,7 @@ class ValueNode extends Node implements Serializable
 	
 	double value;
 	
-	public ValueNode(double pi)
+	ValueNode(double pi)
 	{
 		super(Operand.VALUE);
 		this.value = pi;

@@ -13,11 +13,12 @@ import java.util.List;
 
 import equation.Equation;
 import equation.EquationParser;
-import equation.OptimizationResult;
-import equation.SearchDomain;
-import networking.Message.MessageContent;
+import optimization.OptimizationResult;
+import optimization.SearchDomain;
+import visualization.Visualization;
+import visualization.VisualizationLauncher;
 
-public class Client
+class Client
 {
 	private Socket clientSocket;
 	private ObjectOutputStream streamToServer;
@@ -46,7 +47,7 @@ public class Client
 		consoleReader = new BufferedReader(new InputStreamReader(System.in));
 	}
 	
-	public void loop()
+	public void start()
 	{		
 		try
 	    {		
@@ -69,7 +70,7 @@ public class Client
 		{
 			System.out.println("Wrong command");
 			System.out.println(e.getMessage());
-			loop();
+			start();
 		}		
 		catch(SocketException e)
 		{
@@ -99,11 +100,11 @@ public class Client
 		switch(optimizationMethod)
 		{
 			case 1: // Simulated Annealing
-				/*if(line.length != 3)
+				if(line.length < 3)
 				{
-					System.out.println("Wrong command for getting free termins");
+					System.out.println("Wrong number of arguments");
 					return null;
-				}*/
+				}
 				
 				data.add(optimizationMethod);
 
@@ -120,11 +121,11 @@ public class Client
 			break;
 			
 			case 2: // Differential Evolution
-				/*if(line.length !=3)
+				if(line.length < 3)
 				{
-					System.out.println("Wrong command for getting free termins");
+					System.out.println("Wrong number of arguments");
 					return null;
-				}*/
+				}
 				
 				data.add(optimizationMethod);
 
@@ -157,7 +158,17 @@ public class Client
 		{
 			case RESULT:
 				OptimizationResult result = (OptimizationResult) serverCallback.getData();
+				
 				System.out.println(result);
+				
+				try
+				{
+					VisualizationLauncher.show(new Visualization(result));
+				}
+				catch(Exception e)
+				{
+					e.printStackTrace();
+				}
 			break;
 			
 			default:

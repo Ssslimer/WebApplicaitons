@@ -2,17 +2,12 @@ package networking;
 
 import java.io.Serializable;
 
-public class Message implements Serializable
+class Message implements Serializable
 {
-	public enum MessageContent
-	{
-		REQUEST, RESULT, STRING;
-	} 
-	
 	private static final long serialVersionUID = -5885736425999483646L;
 	
 	private final MessageContent content;
-	private final Object data;
+	private final Object data;	
 
 	public Message(MessageContent activity, Object data)
 	{

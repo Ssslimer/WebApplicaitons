@@ -9,13 +9,12 @@ import java.net.SocketException;
 import java.util.List;
 
 import equation.Equation;
-import equation.OptimizationResult;
-import equation.SearchDomain;
-import networking.Message.MessageContent;
 import optimization.DifferentialEvolution;
+import optimization.OptimizationResult;
+import optimization.SearchDomain;
 import optimization.SimulatedAnnealing;
 
-public class ConnectionServer extends Thread
+class ConnectionServer extends Thread
 {	
 	private Socket clientSocket;
 	private ObjectInputStream streamFromClient;
@@ -76,8 +75,7 @@ public class ConnectionServer extends Thread
 					int maxSteps = (int) data.get(2);
 					SearchDomain range = (SearchDomain) data.get(3);
 					
-					SimulatedAnnealing sa = new SimulatedAnnealing();
-					OptimizationResult result = sa.findGlobalOptimum(eq, maxSteps, range);
+					OptimizationResult result = SimulatedAnnealing.findGlobalOptimum(eq, maxSteps, range);
 					
 					return new Message(MessageContent.RESULT, result);
 				}
@@ -86,8 +84,7 @@ public class ConnectionServer extends Thread
 					int maxSteps = (int) data.get(2);
 					SearchDomain range = (SearchDomain) data.get(3);
 					
-					DifferentialEvolution de = new DifferentialEvolution();
-					OptimizationResult result = de.findGlobalOptimum(eq, maxSteps, range);
+					OptimizationResult result = DifferentialEvolution.findGlobalOptimum(eq, maxSteps, range);
 
 					return new Message(MessageContent.RESULT, result);
 				}

@@ -139,7 +139,6 @@ public class EquationParser
 									else
 									{
 										i += subequationData.jumpTo-1;
-										//equation.root.right = new ValueNode(value);
 										equation.root.right = subEquation.root;
 									}
 	
@@ -505,10 +504,8 @@ public class EquationParser
 				default : break;
 			}
 		}
-			
-		//if(foundOperand) return new SubequationData(s.substring(j), j);
-		//else 
-			return new SubequationData(s, s.length());
+		
+		return new SubequationData(s, s.length());
 	}
 	
 	private boolean hasStrongerOperand(String s, int begin, int operandBeforePower)

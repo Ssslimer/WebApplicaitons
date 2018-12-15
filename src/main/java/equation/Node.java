@@ -2,14 +2,14 @@ package equation;
 
 import java.io.Serializable;
 
-public class Node implements Serializable
+class Node implements Serializable
 {
 	private static final long serialVersionUID = 6466646292999705039L;
 	
 	Operand operand;
 	Node left, right;
 	
-	public Node(Operand operand)
+	Node(Operand operand)
 	{
 		this.operand = operand;
 	}
