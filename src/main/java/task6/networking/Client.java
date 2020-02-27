@@ -51,13 +51,7 @@ class Client
 	{		
 		try
 	    {		
-			String input = getUserInput();
-			if(input.equalsIgnoreCase("exit") || input.equalsIgnoreCase("quit") || input.equalsIgnoreCase("stop"))
-			{
-				System.out.println("Application has been closed");
-				return;
-			}
-			
+			String input = getUserInput();			
 			Message message = prepareMessage(input);
 			if(message == null) return;
 				

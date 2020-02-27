@@ -16,6 +16,7 @@ public class OptimizationsTests
 		
 		double result = equation.compute(variables);
 		System.out.printf("Global minima: %.4f \n", result);
+		System.out.println();
 	}
 	
 	@Test

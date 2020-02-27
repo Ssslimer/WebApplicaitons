@@ -15,10 +15,10 @@ public class DifferentialEvolution
 	public static OptimizationResult findGlobalOptimum(Equation eq, int maxSteps, SearchDomain searchDomain)
 	{		
 		final double changeThreshold = 0.00001d;
-		final int problemSize = eq.getVariables().size();
 		final double differentialWeight = 0.8d;
 		final double crossoverRate = 0.9d;
 		final int populationSize = 10;
+		final int problemSize = eq.getVariables().size();
 			
 		double[][] population = new double[populationSize][problemSize];
 		double[]   bestSolution = new double[problemSize];
