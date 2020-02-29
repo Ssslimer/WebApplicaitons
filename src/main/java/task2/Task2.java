@@ -1,15 +1,23 @@
 package task2;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
 
 public class Task2
 {
-	public static void main(String[] args) throws MalformedURLException, IOException
+	public static void main(String[] args)
 	{
 		String websiteAddress = args[0];
 		
-		Website website = new Website(websiteAddress);
-		website.saveDataToFile();
+		try
+		{
+			Website website = new Website(websiteAddress);
+			website.saveDataToFile("website_data.txt");
+		}
+		catch(IOException e)
+		{
+			System.out.println("The process failed");
+			System.out.println(e.getMessage());
+		}
+
 	}
 }

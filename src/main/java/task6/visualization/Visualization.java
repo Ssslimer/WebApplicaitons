@@ -50,7 +50,6 @@ public class Visualization
         
         Scatter scatter = new Scatter(coords, Color.RED);
         scatter.setWidth(3f);
-        // 1 -20*exp(-0.2*(0.5*(par0^2+par1^2))^0.5)-exp(0.5*(cos(2*pi*par0)+cos(2*pi*par1)))+e+20 10000 -5 5 -5 5
         chart = new Chart(Quality.Nicest, CANVAS_TYPE);
         chart.getScene().getGraph().add(surface);
         chart.getScene().getGraph().add(scatter);

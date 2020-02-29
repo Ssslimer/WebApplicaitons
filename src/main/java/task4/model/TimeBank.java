@@ -11,9 +11,11 @@ import java.util.Map;
 public class TimeBank
 {
 	public static Map<String, Client> clients = Collections.synchronizedMap(new HashMap<>());
+	private static final int MAX_RESERVATIONS_PER_DAY = 8;
 	
-	private String[] reservations = new String[8];
-	private boolean[] isLocked = new boolean[8];
+	
+	private String[] reservations = new String[MAX_RESERVATIONS_PER_DAY];
+	private boolean[] isLocked = new boolean[MAX_RESERVATIONS_PER_DAY];
 
 	private synchronized void lock(int hour)
 	{

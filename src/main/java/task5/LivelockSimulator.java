@@ -7,14 +7,14 @@ import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
-public class LivelockSimulator
+public class LivelockSimulator implements Startable
 {
 	private enum PavementSide
 	{
 		UP, DOWN
 	}
 	
-	public void startSimulation()
+	public void start()
 	{
 		Pedestrian p1 = new Pedestrian("Alphonse", PavementSide.UP);
 		Pedestrian p2 = new Pedestrian("Gaston", PavementSide.UP);
@@ -76,13 +76,13 @@ public class LivelockSimulator
 			{
 				if(side == other.side)
 				{
-					try {Thread.sleep(1000);
-					}catch(InterruptedException e) {}
+					try {Thread.sleep(1000);}
+					catch(InterruptedException e) {}
 					
 					changeSide();
 		
-					try {Thread.sleep(1000);
-					}catch(InterruptedException e) {}
+					try {Thread.sleep(1000);}
+					catch(InterruptedException e) {}
 					
 					continue;
 				}

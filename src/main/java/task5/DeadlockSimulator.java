@@ -9,7 +9,7 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 
-public class DeadlockSimulator
+public class DeadlockSimulator implements Startable
 {
 	private final String s1 = "String No. 1 for testing deadlock";
 	private final String s2 = "String No. 2 for testing deadlock";
@@ -17,7 +17,7 @@ public class DeadlockSimulator
 	private final Lock s1Lock = new ReentrantLock();
 	private final Lock s2Lock = new ReentrantLock();
 	
-	public void startSimulation()
+	public void start()
 	{
         ExecutorService service = Executors.newFixedThreadPool(2);
         

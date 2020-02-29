@@ -4,43 +4,14 @@ import java.util.Random;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-public class StarvationSimulator
+public class StarvationSimulator implements Startable
 {
 	private int[] tab = {1, 123, 56, 47, 123, 56, 658, 12, 76, 34, 253, 667, 115, 980};
 	private Lock lock = new ReentrantLock();	
 	
 	private static Random random = new Random();
 	
-	private class MyTask implements Runnable, Comparable<MyTask>
-	{
-		private final int priority;
-		
-		public MyTask(int priority)
-		{
-			this.priority = priority;
-		}
-		
-		@Override
-		public void run()
-		{
-			long t1 = System.nanoTime();
-			double b = random.nextDouble() * 3.14 * Math.sin(random.nextInt());
-			long t2 = System.nanoTime();
-			
-			System.out.println("Priority: "+ priority + " Time: " + (t2-t1) + " Value: " + ((t2-t1) * b));
-			
-			try {Thread.sleep(100);
-			}catch(InterruptedException e){}
-		}
-
-		@Override
-		public int compareTo(MyTask o)
-		{
-			return o.priority - this.priority;
-		}		
-	}
-	
-	public void startSimulation()
+	public void start()
 	{
 		Thread t1 = new Thread(new GreedyTask());
 		Thread t2 = new Thread(new GreedyTask());
