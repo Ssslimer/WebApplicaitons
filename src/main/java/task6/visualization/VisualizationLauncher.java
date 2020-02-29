@@ -1,4 +1,4 @@
-package visualization;
+package task6.visualization;
 
 import java.awt.Rectangle;
 

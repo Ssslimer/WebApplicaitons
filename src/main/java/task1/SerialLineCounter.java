@@ -1,3 +1,5 @@
+package task1;
+
 import java.io.IOException;
 import java.nio.charset.MalformedInputException;
 import java.nio.file.Files;
@@ -6,9 +8,9 @@ import java.nio.file.Paths;
 
 public class SerialLineCounter extends LineCounter
 {
-	public SerialLineCounter(String[] arrayList)
+	public SerialLineCounter(String[] pathsToFiles)
 	{
-		super(arrayList);
+		super(pathsToFiles);
 	}
 	
 	@Override
@@ -16,7 +18,7 @@ public class SerialLineCounter extends LineCounter
 	{
 		int linesCount = 0;
 		
-		for(String fileName : fileNames)
+		for(String fileName : pathsToFiles)
 		{
 			Path path = Paths.get(fileName);
 			

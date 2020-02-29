@@ -1,3 +1,5 @@
+package task3;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -40,7 +42,6 @@ public class N3_Server
 			while((line = br.readLine()) != null )
 			{
 				if(line.equalsIgnoreCase("stop")) System.exit(0);
-				//connecionsMenneger.interrupt();
 			}
 		}
         catch(IOException e)

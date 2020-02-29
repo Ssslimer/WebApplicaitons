@@ -1,4 +1,4 @@
-package optimization;
+package task6.optimization;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -6,7 +6,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
-import equation.Equation;
+import task6.equation.Equation;
 
 public class DifferentialEvolution
 {
@@ -63,6 +63,7 @@ public class DifferentialEvolution
 		}
 		
 		double[] variablesHistory = generateVariablesHistory(variablesMemory, problemSize * populationSize);
+		
 		return new OptimizationResult(eq, maxSteps, eq.compute(bestSolution), bestSolution, variablesHistory, searchDomain.ranges);
 	}
 	

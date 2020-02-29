@@ -1,11 +1,11 @@
-package pai_o1.mains;
+package task4.mains;
 
 import java.io.IOException;
 
-import pai_o1.model.ConnectionClient;
-import pai_o1.ui.ConsoleUI;
-import pai_o1.ui.SimulatedClientUI;
-import pai_o1.ui.UserInterface;
+import task4.model.ConnectionClient;
+import task4.ui.ConsoleUI;
+import task4.ui.SimulatedClientUI;
+import task4.ui.UserInterface;
 
 public class MainClient
 {

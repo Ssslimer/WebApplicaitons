@@ -1,6 +1,8 @@
+package task1;
+
 import java.util.Arrays;
 
-public class N1
+public class Task1
 {
 	public enum Mode
 	{

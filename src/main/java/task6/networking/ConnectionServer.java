@@ -1,4 +1,4 @@
-package networking;
+package task6.networking;
 
 import java.io.EOFException;
 import java.io.IOException;
@@ -8,11 +8,11 @@ import java.net.Socket;
 import java.net.SocketException;
 import java.util.List;
 
-import equation.Equation;
-import optimization.DifferentialEvolution;
-import optimization.OptimizationResult;
-import optimization.SearchDomain;
-import optimization.SimulatedAnnealing;
+import task6.equation.Equation;
+import task6.optimization.DifferentialEvolution;
+import task6.optimization.OptimizationResult;
+import task6.optimization.SearchDomain;
+import task6.optimization.SimulatedAnnealing;
 
 class ConnectionServer extends Thread
 {	

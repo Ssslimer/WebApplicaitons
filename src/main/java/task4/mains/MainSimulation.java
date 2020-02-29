@@ -1,4 +1,4 @@
-package pai_o1.mains;
+package task4.mains;
 
 import java.io.IOException;
 

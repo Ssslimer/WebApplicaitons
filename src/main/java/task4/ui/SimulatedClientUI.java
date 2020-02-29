@@ -1,13 +1,13 @@
-package pai_o1.ui;
+package task4.ui;
 
 import java.net.SocketException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import pai_o1.model.ConnectionClient;
-import pai_o1.model.Message;
-import pai_o1.model.Message.MessageContent;
+import task4.model.ConnectionClient;
+import task4.model.Message;
+import task4.model.Message.MessageContent;
 
 public class SimulatedClientUI implements UserInterface
 {

@@ -3,8 +3,8 @@ package tests;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import equation.Equation;
-import equation.EquationParser;
+import task6.equation.Equation;
+import task6.equation.EquationParser;
 
 public class EquationParserTests
 {

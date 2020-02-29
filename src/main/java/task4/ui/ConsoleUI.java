@@ -1,4 +1,4 @@
-package pai_o1.ui;
+package task4.ui;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -7,9 +7,9 @@ import java.net.SocketException;
 import java.util.Arrays;
 import java.util.List;
 
-import pai_o1.model.ConnectionClient;
-import pai_o1.model.Message;
-import pai_o1.model.Message.MessageContent;
+import task4.model.ConnectionClient;
+import task4.model.Message;
+import task4.model.Message.MessageContent;
 
 public class ConsoleUI implements UserInterface
 {

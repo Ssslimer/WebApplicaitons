@@ -1,4 +1,4 @@
-package equation;
+package task6.equation;
 
 import java.io.Serializable;
 import java.util.HashSet;

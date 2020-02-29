@@ -1,3 +1,5 @@
+package task5;
+
 import java.util.Random;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
@@ -40,49 +42,6 @@ public class StarvationSimulator
 	
 	public void startSimulation()
 	{
-		/*PriorityQueue<Runnable> q = new PriorityQueue<>();
-		
-		q.add(new MyTask(10));
-		q.add(new MyTask(9));
-		q.add(new MyTask(8));
-		q.add(new MyTask(7));
-		q.add(new MyTask(0)); // This MyTask will never be executed, as we add new tasks with higher priority
-		
-		ExecutorService service = Executors.newSingleThreadExecutor();    
-        try
-        {
-            Future<String> f = service.submit(() ->
-            {
-            	while(true)
-            	{
-            		Runnable r = q.poll();
-            		if(r == null) continue;
-            		
-            		Thread t = new Thread(r);
-            		t.start();
-            		
-            		q.add(new MyTask(1 + random.nextInt(100)));
-            		t.join();
-            	}
-            });
-
-            System.out.println(f.get(10, TimeUnit.SECONDS));
-        }
-        catch(TimeoutException e)
-        {
-            System.out.println("Threads stoped. Timed out");
-        }
-        catch(Exception e)
-        {
-            throw new RuntimeException(e);
-        }
-        finally
-        {
-            service.shutdownNow();
-        }
-        */
-		
-		
 		Thread t1 = new Thread(new GreedyTask());
 		Thread t2 = new Thread(new GreedyTask());
 		Thread t3 = new Thread(new GreedyTask());

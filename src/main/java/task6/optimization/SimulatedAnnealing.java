@@ -1,10 +1,10 @@
-package optimization;
+package task6.optimization;
 
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
-import equation.Equation;
+import task6.equation.Equation;
 
 public class SimulatedAnnealing
 {

@@ -1,4 +1,4 @@
-package visualization;
+package task6.visualization;
 
 import org.jzy3d.chart.Chart;
 import org.jzy3d.chart.controllers.keyboard.camera.CameraKeyController;
@@ -14,7 +14,7 @@ import org.jzy3d.plot3d.primitives.Scatter;
 import org.jzy3d.plot3d.primitives.Shape;
 import org.jzy3d.plot3d.rendering.canvas.Quality;
 
-import optimization.OptimizationResult;
+import task6.optimization.OptimizationResult;
 
 public class Visualization
 {

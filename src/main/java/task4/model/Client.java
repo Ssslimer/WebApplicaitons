@@ -1,4 +1,4 @@
-package pai_o1.model;
+package task4.model;
 
 public class Client
 {

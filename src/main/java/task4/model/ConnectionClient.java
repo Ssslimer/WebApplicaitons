@@ -1,4 +1,4 @@
-package pai_o1.model;
+package task4.model;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -7,7 +7,7 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 
-import pai_o1.model.Message.MessageContent;
+import task4.model.Message.MessageContent;
 
 public class ConnectionClient
 {

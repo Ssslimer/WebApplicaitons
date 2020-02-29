@@ -1,18 +1,21 @@
+package task5;
+
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
-import sun.misc.Lock;
 
 public class DeadlockSimulator
 {
 	private final String s1 = "String No. 1 for testing deadlock";
 	private final String s2 = "String No. 2 for testing deadlock";
 	
-	private final Lock s1Lock = new Lock();
-	private final Lock s2Lock = new Lock();
+	private final Lock s1Lock = new ReentrantLock();
+	private final Lock s2Lock = new ReentrantLock();
 	
 	public void startSimulation()
 	{
@@ -74,11 +77,6 @@ public class DeadlockSimulator
             
             try {Thread.sleep(2000);}
 			catch(InterruptedException e) {e.printStackTrace();}
-            
-            /*System.out.println(f1.isCancelled());
-            System.out.println(f1.isDone());
-            System.out.println(f2.isCancelled());
-            System.out.println(f2.isDone());*/
         }
 	}
 }

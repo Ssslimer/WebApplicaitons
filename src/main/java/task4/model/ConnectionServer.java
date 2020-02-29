@@ -1,4 +1,4 @@
-package pai_o1.model;
+package task4.model;
 
 import java.io.EOFException;
 import java.io.IOException;
@@ -9,8 +9,8 @@ import java.net.SocketException;
 import java.util.Collections;
 import java.util.List;
 
-import pai_o1.model.Message.MessageContent;
-import pai_o1.model.TimeBank.Result;
+import task4.model.Message.MessageContent;
+import task4.model.TimeBank.Result;
 
 public class ConnectionServer extends Thread
 {	

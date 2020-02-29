@@ -1,11 +1,11 @@
-package pai_o1.mains;
+package task4.mains;
 
 import java.io.IOException;
 import java.net.SocketException;
 import java.util.List;
 
-import pai_o1.model.ConnectionClient;
-import pai_o1.model.Message;
+import task4.model.ConnectionClient;
+import task4.model.Message;
 
 public class MainServerCallback
 {

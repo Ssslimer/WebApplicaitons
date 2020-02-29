@@ -1,4 +1,4 @@
-package equation;
+package task6.equation;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

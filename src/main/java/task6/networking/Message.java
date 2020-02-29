@@ -1,4 +1,4 @@
-package networking;
+package task6.networking;
 
 import java.io.Serializable;
 

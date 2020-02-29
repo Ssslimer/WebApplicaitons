@@ -1,3 +1,5 @@
+package task1;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -7,9 +9,9 @@ import java.util.List;
 
 public class ParallelLineCounter extends LineCounter
 {
-	public ParallelLineCounter(String[] arrayList)
+	public ParallelLineCounter(String[] pathsToFiles)
 	{
-		super(arrayList);
+		super(pathsToFiles);
 	}
 	
 	@Override
@@ -19,7 +21,7 @@ public class ParallelLineCounter extends LineCounter
 		
 		List<CountLinesThread> countlinesTasks = new LinkedList<>();
 		
-		for(String fileName : fileNames)
+		for(String fileName : pathsToFiles)
 		{
 			Path path = Paths.get(fileName);
 			System.out.println("Reading file: " + path.toAbsolutePath());

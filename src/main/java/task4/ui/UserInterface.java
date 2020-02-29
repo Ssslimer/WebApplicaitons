@@ -1,4 +1,4 @@
-package pai_o1.ui;
+package task4.ui;
 
 public interface UserInterface
 {

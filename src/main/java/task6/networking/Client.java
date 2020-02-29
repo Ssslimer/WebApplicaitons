@@ -1,4 +1,4 @@
-package networking;
+package task6.networking;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -11,12 +11,12 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
-import equation.Equation;
-import equation.EquationParser;
-import optimization.OptimizationResult;
-import optimization.SearchDomain;
-import visualization.Visualization;
-import visualization.VisualizationLauncher;
+import task6.equation.Equation;
+import task6.equation.EquationParser;
+import task6.optimization.OptimizationResult;
+import task6.optimization.SearchDomain;
+import task6.visualization.Visualization;
+import task6.visualization.VisualizationLauncher;
 
 class Client
 {

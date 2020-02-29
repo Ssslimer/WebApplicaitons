@@ -1,10 +1,10 @@
-package pai_o1.mains;
+package task4.mains;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-import pai_o1.model.TimeBank;
+import task4.model.TimeBank;
 
 public class MainServer
 {

@@ -1,11 +1,12 @@
 package tests;
+
 import org.junit.jupiter.api.Test;
 
-import equation.Equation;
-import equation.EquationParser;
-import optimization.DifferentialEvolution;
-import optimization.SearchDomain;
-import optimization.SimulatedAnnealing;
+import task6.equation.Equation;
+import task6.equation.EquationParser;
+import task6.optimization.DifferentialEvolution;
+import task6.optimization.SearchDomain;
+import task6.optimization.SimulatedAnnealing;
 
 public class OptimizationsTests
 {

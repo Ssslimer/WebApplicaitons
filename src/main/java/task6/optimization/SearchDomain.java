@@ -1,4 +1,4 @@
-package optimization;
+package task6.optimization;
 
 import java.io.Serializable;
 
